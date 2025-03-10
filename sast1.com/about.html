@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>SAST1</title>
+
+  <!-- favicon setting-->
+  <link rel="icon" href="images/favicon.ico/favicon-16x16.png" sizes="16x16" type="image/x-icon" />
+  <!-- slider stylesheet -->
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- Header를 불러올 div -->
+    <div id="header-container"></div>
+    <!-- end header section -->
+  </div>
+
+
+  <!-- who section -->
+
+  <section class="who_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="img-box">
+            <img src="images/bg-2.jpg">
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                WHAT WE DO?
+              </h2>
+            </div>
+            <p>
+              We are a newly established company in Malaysia engaged in the import and export of steel products. 
+              Our team comprises experts with over 30 years of experience in various industries, including steel, finance, and trade. 
+              We have come together to form this enterprise starting this year. Our primary exports include Iron Scrap, Rebar, Billet, and Steel Sheets. 
+              We prioritize meeting delivery deadlines, offering competitive prices, and building trust with our customers.
+            </p>
+            <p>
+              If you would like more information or have specific inquiries, 
+              please feel free to contact us by clicking the button below. 
+              We look forward to providing you with further details and addressing any questions you may have.
+            </p>
+            <div>
+              <a href="members.html">
+                Find Company Members
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end who section -->
+
+
+  <!-- Footer 불러올 div -->
+  <div id="footer-container"></div>
+  <!-- end header section -->
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- owl carousel script 
+    -->
+  <script type="text/javascript">
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      margin: 0,
+      navText: [],
+      center: true,
+      autoplay: true,
+      autoplayHoverPause: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        1000: {
+          items: 3
+        }
+      }
+    });
+  </script>
+  <!-- end owl carousel script -->
+  <!-- JavaScript 코드 -->
+  <script>
+    // Header를 불러오는 함수
+    function loadHeader() {
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Header를 불러오는 동안 오류가 발생했습니다.', error);
+            });
+    }
+
+    // Footer를 불러오는 함수
+    function loadFooter() {
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Footer를 불러오는 동안 오류가 발생했습니다.', error);
+            });
+    }
+
+    // 페이지가 로드될 때 Header와 Footer를 불러옴
+    window.addEventListener('load', () => {
+        loadHeader();
+        loadFooter();
+    });
+</script>
+
+</body>
+
+</html>
