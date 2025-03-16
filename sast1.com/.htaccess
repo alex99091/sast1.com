@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # HTTP → HTTPS 리디렉션 (sast1.com 강제)
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} !^sast1\.com$ [NC]
+    RewriteRule ^(.*)$ https://sast1.com%{REQUEST_URI} [R=301,L]
+    
+    # www.sast1.com → sast1.com 리디렉션
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://sast1.com/$1 [R=301,L]
+    
+    # index.html을 기본 페이지로 설정
+    DirectoryIndex index.html
+    
+    # 존재하지 않는 파일 요청 시 index.html로 이동
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>
