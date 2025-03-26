@@ -54,26 +54,25 @@
                     <div class="row">
                         <div class="col-md-9 mx-auto">
                             <div class="contact-form">
+                                <!-- form 부분만 수정 -->
                                 <form action="send.php" method="post">
-                                    <!-- send_email.php로 POST 요청을 보냄 -->
                                     <div>
-                                        <input type="text" name="name" placeholder="Full Name ">
+                                        <input type="text" name="name" placeholder="Full Name" required>
                                     </div>
                                     <div>
-                                        <input type="text" name="number" placeholder="Phone Number">
+                                        <input type="text" name="number" placeholder="Phone Number" required>
                                     </div>
                                     <div>
-                                        <input type="email" name="email" placeholder="Email Address">
+                                        <input type="email" name="email" placeholder="Email Address" required>
                                     </div>
                                     <div>
-                                        <input type="text" name="message" placeholder="Message" class="input_message">
+                                        <input type="text" name="message" placeholder="Message" class="input_message" required>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" name="send" class="btn_on-hover">
-                                            Send
-                                        </button>
+                                        <button type="submit" name="send" class="btn_on-hover">Send</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
