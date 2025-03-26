@@ -7,14 +7,15 @@ require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 require 'PHPMailer/Exception.php';
 
-// 보안 설정 정보 로드
+// 설정 파일 로드
 $config = require 'config.php';
 
-// PHPMailer 설정
+// PHPMailer 객체 생성
 $mail = new PHPMailer(true);
 
 if (isset($_POST["send"])) {
     try {
+        // SMTP 설정
         $mail->isSMTP();
         $mail->Host = $config['SMTP_HOST'];
         $mail->SMTPAuth = true;
@@ -23,19 +24,32 @@ if (isset($_POST["send"])) {
         $mail->SMTPSecure = $config['SMTP_SECURE'];
         $mail->Port = $config['SMTP_PORT'];
 
-        // 발신자 & 수신자
-        $mail->setFrom($config['SMTP_USER'], 'SAST1 Contact Bot');
-        $mail->addAddress($_POST["email"]);
+        // 보내는 사람 (고정)
+        $mail->setFrom($config['SMTP_USER'], 'SAST1 Contact Form');
 
-        // 메일 내용 설정
+        // 수신자: 너의 Gmail 주소
+        $mail->addAddress($config['SMTP_USER']);
+
+        // 답장 받을 주소: 사용자가 입력한 이메일
+        $mail->addReplyTo($_POST["email"], $_POST["name"]);
+
+        // 이메일 내용 설정
         $mail->isHTML(true);
-        $mail->Subject = 'Contact Form Submission';
-        $mail->Body =
-            'Name: ' . htmlspecialchars($_POST["name"]) . '<br>' .
-            'Number: ' . htmlspecialchars($_POST["number"]) . '<br>' .
-            'Email: ' . htmlspecialchars($_POST["email"]) . '<br>' .
-            'Message: ' . nl2br(htmlspecialchars($_POST["message"]));
+        $mail->Subject = 'New Contact Form Submission';
 
+        $mail->Body =
+            '<strong>Name:</strong> ' . htmlspecialchars($_POST["name"]) . '<br>' .
+            '<strong>Number:</strong> ' . htmlspecialchars($_POST["number"]) . '<br>' .
+            '<strong>Email:</strong> ' . htmlspecialchars($_POST["email"]) . '<br>' .
+            '<strong>Message:</strong><br>' . nl2br(htmlspecialchars($_POST["message"]));
+
+        $mail->AltBody =
+            "Name: {$_POST["name"]}\n" .
+            "Number: {$_POST["number"]}\n" .
+            "Email: {$_POST["email"]}\n" .
+            "Message:\n{$_POST["message"]}";
+
+        // 이메일 전송
         $mail->send();
 
         echo "
